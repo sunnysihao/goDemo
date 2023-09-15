@@ -1,0 +1,27 @@
+syntax="proto3";
+
+package idl;
+
+option go_package="./idl/my_proto; student";
+
+import "google/protobuf/timestamp.proto";
+
+// proto中字段名的驼峰格式对应于转为go语言中的结构体字段名
+//
+message Student{
+  string Name = 1;
+  int32 Age = 2;
+  bool Gender = 3;
+  float Height = 4;
+  repeated string Location = 5;
+  map<string,float> score = 6;
+  google.protobuf.Timestamp Birthday = 7;
+}
+
+message Request{
+  string StudentId = 1;
+}
+
+service StudentService{
+  rpc GetStudentInfo (Request) returns (Student);
+}
